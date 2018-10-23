@@ -17,8 +17,7 @@ public class RandomListIterator<T> implements Iterator {
         this.list = list;
         count = list.size();
         usedIndex = new HashSet<>();
-        //TODO нужно будет убрать зерно, чтобы генерировались разные последовательности
-        random = new Random(42);
+        random = new Random();
     }
 
     @Override

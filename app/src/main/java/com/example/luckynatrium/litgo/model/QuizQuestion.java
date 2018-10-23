@@ -1,17 +1,26 @@
 package com.example.luckynatrium.litgo.model;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 
-public class QuizQuestion {
+public class QuizQuestion implements Iterable {
 
     ///Цитата, доказывающая правильность ответа
-    private String evidence;
+    public final String evidence;
     ///Сам вопрос
-    private String question;
-    ///Верный ответ
-    private String  correctAnswer;
-    ///Другие варианты ответа
-    private ArrayList<String> incorrectAnswers;
+    public final String question;
+    ///Варианты ответа
+    private ArrayList<QuizAnswer> answers;
 
 
+    public QuizQuestion(String evidence, String question, ArrayList<QuizAnswer> answers) {
+        this.evidence = evidence;
+        this.question = question;
+        this.answers = answers;
+    }
+
+    @Override
+    public Iterator iterator() {
+        return new RandomListIterator<QuizAnswer>(answers);
+    }
 }

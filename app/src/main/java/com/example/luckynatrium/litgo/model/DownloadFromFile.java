@@ -1,28 +1,32 @@
 package com.example.luckynatrium.litgo.model;
 
 import android.content.Context;
+import android.content.res.Resources;
+
+import com.example.luckynatrium.litgo.R;
 
 import java.io.BufferedReader;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
+import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
 
 public class DownloadFromFile {
 
-    final String FILE_NAME="file";
+    private final String FILE_NAME="file";
 
-    Context context;
+    public Context context;
 
     public DownloadFromFile(Context context) {
         this.context=context;
     }
 
-    public QuizQuestion downloadQuestion(){
+    public QuizQuestion downloadQuestion(String filename){
 
         try{
-            FileInputStream fileInputStream=context.openFileInput(FILE_NAME);
-            BufferedReader br=new BufferedReader(new InputStreamReader(fileInputStream));
+            InputStream inputStream = context.getResources().openRawResource(getIndent(filename));
+            BufferedReader br=new BufferedReader(new InputStreamReader(inputStream));
             String str="";
             String question="";
             String evidence="";
@@ -52,4 +56,8 @@ public class DownloadFromFile {
         }
 
     }
+    public int getIndent(String filename){
+       return context.getResources().getIdentifier(filename,"raw","com.example.luckynatrium.litgo");
+    }
+
 }

@@ -22,42 +22,61 @@ public class DownloadFromFile {
         this.context=context;
     }
 
-    public QuizQuestion downloadQuestion(String filename){
+    public ArrayList<QuizQuestion> downloadQuestions(String filename){
 
         try{
             InputStream inputStream = context.getResources().openRawResource(getIndent(filename));
             BufferedReader br=new BufferedReader(new InputStreamReader(inputStream));
             String str="";
-            String question="";
-            String evidence="";
-            ArrayList<QuizAnswer> answers=new ArrayList<>();
-            while((str=br.readLine())!=""){ //Вопросы разделяем пустой строкой
-
-                String resource =str.substring(2);
-
-                if(str.startsWith("Q"))
-                    question= resource;
-
-                if(str.startsWith("C"))
-                    answers.add(new QuizAnswer(resource,true));
-
-                if(str.startsWith("W"))
-                    answers.add(new QuizAnswer(resource,false));
-                if(str.startsWith("E"))
-                    evidence=resource;
-
+            ArrayList<QuizQuestion> questions = new ArrayList<>();
+            QuizQuestionPrototype prototype = new QuizQuestionPrototype();
+            while((str=br.readLine())!=null){ //Вопросы разделяем пустой строкой
+                switch(str.charAt(0)) {
+                    case 'Q':
+                        prototype.question = str.substring(2);
+                        break;
+                    case 'C':
+                        prototype.answers.add(new QuizAnswer(str.substring(2), true));
+                        break;
+                    case 'W':
+                        prototype.answers.add(new QuizAnswer(str.substring(2), false));
+                        break;
+                    case 'E':
+                        prototype.evidence = str.substring(2);
+                        break;
+                    case '{':
+                        prototype.reset();
+                        break;
+                    case '}':
+                        questions.add(prototype.getResult());
+                        break;
+                }
             }
-            return new QuizQuestion(evidence,question,answers);
-
-        }
+            return questions;
+        }//Замалчивать исключение нехорошо
         catch (java.io.IOException fe){
             fe.printStackTrace();
-            return new QuizQuestion("error","Invalid question download",new ArrayList<QuizAnswer>());//TODO change new arraylist to something right
+            return null;//new QuizQuestion("error","Invalid question download",new ArrayList<QuizAnswer>());//TODO change new arraylist to something right
         }
 
     }
     public int getIndent(String filename){
        return context.getResources().getIdentifier(filename,"raw","com.example.luckynatrium.litgo");
     }
+    private static class QuizQuestionPrototype{
+        public String question;
+        public String evidence;
+        public ArrayList<QuizAnswer> answers;
 
+        public QuizQuestionPrototype() {
+            answers = new ArrayList<>();
+        }
+        public void reset(){
+            question = evidence = null;
+            answers = new ArrayList<>();
+        }
+        public QuizQuestion getResult(){
+            return new QuizQuestion(evidence,question,answers);
+        }
+    }
 }

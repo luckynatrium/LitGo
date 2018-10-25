@@ -6,14 +6,14 @@ import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.example.luckynatrium.litgo.model.QuizAnswer;
+import com.example.luckynatrium.litgo.model.DownloadFromFile;
 import com.example.luckynatrium.litgo.model.QuizQuestion;
 import com.example.luckynatrium.litgo.controller.QuizQuestionController;
+import com.example.luckynatrium.litgo.model.RandomListIterator;
 
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Iterator;
 
 public class QuizActivity extends AppCompatActivity {
 
@@ -22,7 +22,7 @@ public class QuizActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_quiz);
         //Хранение вопросов должно быть сделано по другому, но потом, тестирует QuizQuestionController
-        final QuizQuestion q = new QuizQuestion(
+        /*final QuizQuestion q = new QuizQuestion(
                 "В Гороховой улице, в одном из больших домов, народонаселения которого стало бы на целый уездный город, лежал утром в постели, на своей квартире, Илья Ильич Обломов",
                 "Помню, как Ольга пела мне арию, от которой ощущается трепет по всему телу. Не споете ее для меня?",
                 new ArrayList<QuizAnswer>(
@@ -32,10 +32,12 @@ public class QuizActivity extends AppCompatActivity {
                                 new QuizAnswer("Falstaff", false)
                         )
                 )
-        );
-
+        );*/
+        DownloadFromFile downloader = new DownloadFromFile(this);
+        final ArrayList<QuizQuestion> q = downloader.downloadQuestions("oblomov");
+        final Iterator questions = new RandomListIterator(q);
         QuizQuestionController controller = new QuizQuestionController(
-                q, (TextView)findViewById(R.id.quiz_text_question),
+                (QuizQuestion) questions.next(), (TextView)findViewById(R.id.quiz_text_question),
                 new ArrayList<Button>(Arrays.asList(
                         (Button)findViewById(R.id.quiz_button_answer_1),
                         (Button)findViewById(R.id.quiz_button_answer_2),
@@ -44,13 +46,15 @@ public class QuizActivity extends AppCompatActivity {
         controller.setAnswerListener(new QuizQuestionController.AnswerListener() {
             @Override
             public void correctAnswer(QuizQuestionController questionController) {
-                questionController.changeQuestion(q);
-                Toast.makeText(QuizActivity.this, "Верный ответ!", Toast.LENGTH_SHORT).show();
+                if(questions.hasNext())
+                    questionController.changeQuestion((QuizQuestion)questions.next());
+                else
+                    Toast.makeText(QuizActivity.this, "Вопросы кончились", Toast.LENGTH_SHORT).show();
             }
 
             @Override
             public void incorrectAnswer(QuizQuestionController questionController) {
-                Toast.makeText(QuizActivity.this, "Ответ неверный!", Toast.LENGTH_SHORT).show();
+                //Toast.makeText(QuizActivity.this, "Ответ неверный!", Toast.LENGTH_SHORT).show();
             }
         });
     }

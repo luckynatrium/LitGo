@@ -14,8 +14,6 @@ import java.util.ArrayList;
 
 public class DownloadFromFile {
 
-    private final String FILE_NAME="file";
-
     public Context context;
 
     public DownloadFromFile(Context context) {
@@ -63,6 +61,62 @@ public class DownloadFromFile {
     public int getIndent(String filename){
        return context.getResources().getIdentifier(filename,"raw","com.example.luckynatrium.litgo");
     }
+    public ArrayList<LitCharacter> get_Character_from_file(String filename)
+    {
+
+        try
+        {
+            InputStream inputStream = context.getResources().openRawResource(getIndent(filename));
+            BufferedReader br = new BufferedReader(new InputStreamReader(inputStream));
+            String str="";
+            ArrayList<LitCharacter> characters = new ArrayList<>();
+            LitCharacterPrototype litCharacter_prot = new LitCharacterPrototype();
+            while((str = br.readLine()) != null)
+            {
+                switch (str.charAt(0)){
+                    case 'N':
+                        litCharacter_prot.name = str.substring(2);
+                        break;
+                    case 'W':
+                        litCharacter_prot.writing_name = str.substring(2);
+                        break;
+                    case 'D':
+                        litCharacter_prot.desription = str.substring(2);
+                        break;
+                    case 'P':
+                        litCharacter_prot.pic_path = str.substring(2);
+                        break;
+                    case 'C'://Знак конца героя
+                       characters.add(litCharacter_prot.getResult());
+                       litCharacter_prot.reset();
+                       break;
+                }
+            }
+            return characters;
+        }
+        catch(java.io.IOException fe)
+        {
+            fe.printStackTrace();
+            return null;
+        }
+
+
+    }
+
+    private static class LitCharacterPrototype
+    {
+        public  String name, writing_name, pic_path, desription;
+        public LitCharacterPrototype(){}
+        public void reset()
+        {
+            name = writing_name = pic_path = desription = null;
+        }
+        public LitCharacter getResult()
+        {
+            return new LitCharacter(name,writing_name,pic_path,desription);
+        }
+    }
+
     private static class QuizQuestionPrototype{
         public String question;
         public String evidence;

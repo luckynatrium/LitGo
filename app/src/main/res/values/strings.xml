@@ -1,3 +1,7 @@
 <resources>
     <string name="app_name">LitGo</string>
+    <string name="open">Open</string>
+    <string name="close">Close</string>
+    <string name="lib_hero">Список героев</string>
 </resources>
+

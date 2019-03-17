@@ -3,5 +3,6 @@
     <string name="open">Open</string>
     <string name="close">Close</string>
     <string name="lib_hero">Список героев</string>
+    <string name="createchallenge">create challenge</string>
 </resources>
 

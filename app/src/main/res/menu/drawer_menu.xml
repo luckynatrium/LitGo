@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
-    <item android:id="@+id/profile" android:title="Профиль" android:icon="@drawable/ic_round_account_circle_24px"></item>
+    <item android:id="@+id/profile" android:title="Профиль" android:icon="@drawable/ic_round_account_circle_24px" android:onClick="openProfile"></item>
     <item android:id="@+id/map" android:title="Карта" android:icon="@drawable/ic_baseline_map_24px"></item>
-    <item android:id="@+id/mes" android:title="Сообщения" android:icon="@drawable/ic_baseline_chat_bubble_outline_24px"></item>
+    <!--<item android:id="@+id/mes" android:title="Сообщения" android:icon="@drawable/ic_baseline_chat_bubble_outline_24px"></item>-->
     <item android:id="@+id/lib" android:title="Библиотека" android:icon="@drawable/ic_outline_library_books_24px"></item>
-    <item android:id="@+id/friend" android:title="Друзья" android:icon="@drawable/ic_baseline_perm_identity_24px"></item>
+    <!--<item android:id="@+id/friend" android:title="Друзья" android:icon="@drawable/ic_baseline_perm_identity_24px"></item>-->
     <item android:id="@+id/setting" android:title="Настройки" android:icon="@drawable/ic_outline_settings_24px"></item>
 </menu>

@@ -17,7 +17,6 @@ public class MainActivity extends AppCompatActivity {
 
     private DrawerLayout drawerLayout;
     private ActionBarDrawerToggle drawerToggle;
-    private TableLayout tl;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

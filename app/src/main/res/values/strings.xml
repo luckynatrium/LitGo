@@ -4,5 +4,8 @@
     <string name="close">Close</string>
     <string name="lib_hero">Список героев</string>
     <string name="createchallenge">create challenge</string>
+    <string name="count_myhero">Количество пойманных героев :</string>"
+    <string name="count_hero">Количество героев :</string>"
+    <string name="name_user">User Name</string>"
 </resources>
 

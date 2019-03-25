@@ -1,4 +1,4 @@
-package com.example.luckynatrium.litgo.model;
+package com.example.luckynatrium.litgo.Classes;
 
 public class LitCharacter {
     private String _name, _writing_name, _pic_path, _desription;

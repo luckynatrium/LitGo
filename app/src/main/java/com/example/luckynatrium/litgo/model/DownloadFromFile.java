@@ -1,19 +1,18 @@
 package com.example.luckynatrium.litgo.model;
 
 import android.content.Context;
-import android.content.res.Resources;
 
-import com.example.luckynatrium.litgo.R;
+import com.example.luckynatrium.litgo.Classes.LitCharacter;
 
 import java.io.BufferedReader;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
 
 public class DownloadFromFile {
 
+    //Array of file names, where characters are saved
+    final String[] CHARACTER_FILES = {"coblomov.txt"};
     public Context context;
 
     public DownloadFromFile(Context context) {
@@ -54,16 +53,29 @@ public class DownloadFromFile {
         }//Замалчивать исключение нехорошо
         catch (java.io.IOException fe){
             fe.printStackTrace();
-            return null;//new QuizQuestion("error","Invalid question download",new ArrayList<QuizAnswer>());//TODO change new arraylist to something right
+            return null;
         }
 
     }
     public int getIndent(String filename){
-       return context.getResources().getIdentifier(filename,"raw","com.example.luckynatrium.litgo");
+       return context.getResources()
+               .getIdentifier(filename,"raw","com.example.luckynatrium.litgo");
+
     }
+
+
+    public ArrayList<LitCharacter> get_All_Characters()
+    {
+        ArrayList<LitCharacter> res = new ArrayList<>();
+        for (String filename:CHARACTER_FILES) {
+               ArrayList<LitCharacter> temp = get_Character_from_file(filename);
+                res.addAll(temp);
+        }
+        return res;
+    }
+
     public ArrayList<LitCharacter> get_Character_from_file(String filename)
     {
-
         try
         {
             InputStream inputStream = context.getResources().openRawResource(getIndent(filename));
@@ -133,4 +145,5 @@ public class DownloadFromFile {
             return new QuizQuestion(evidence,question,answers);
         }
     }
+
 }

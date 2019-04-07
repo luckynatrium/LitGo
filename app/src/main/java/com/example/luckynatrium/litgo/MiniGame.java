@@ -25,6 +25,7 @@ public class MiniGame extends AppCompatActivity implements View.OnClickListener{
 
     public static boolean EndOfGame;
     public static boolean ONCLICK;
+    public static boolean IsRightAnswer;
 
     public class Answer{
         String Answer;
@@ -108,55 +109,52 @@ public class MiniGame extends AppCompatActivity implements View.OnClickListener{
 
     public void proceedQuiz (final int numberOfQuestion)
     {
-
+        IsRightAnswer = false;
         Question Lit = new Question();
       //  Log.d("DEBUG_QUESTION","num of ... is: " + numberOfQuestion);
-        if (numberOfQuestion<Questions.length & !GameOver) {
+        if (numberOfQuestion >= Questions.length) {
+            timer.setText("Game over");
+        }else {
 
-        Lit = Questions[numberOfQuestion];
-    } else {
-        Log.d("DEBUG_QUESTION","OUTOFBOUND");
-            timer.setText("you lose");
-        return;
-    }
-       Answers[0].setBackgroundColor(Color.parseColor("#ff0a3d62"));
-        Answers[1].setBackgroundColor(Color.parseColor("#ff0a3d62"));
-        Answers[2].setBackgroundColor(Color.parseColor("#ff0a3d62"));
-        Answers[3].setBackgroundColor(Color.parseColor("#ff0a3d62"));
+            Lit = Questions[numberOfQuestion];
 
-        Answers[0].setTextColor(Color.WHITE);
-        Answers[1].setTextColor(Color.WHITE);
-        Answers[2].setTextColor(Color.WHITE);
-        Answers[3].setTextColor(Color.WHITE);
+            Answers[0].setBackgroundColor(Color.parseColor("#ff0a3d62"));
+            Answers[1].setBackgroundColor(Color.parseColor("#ff0a3d62"));
+            Answers[2].setBackgroundColor(Color.parseColor("#ff0a3d62"));
+            Answers[3].setBackgroundColor(Color.parseColor("#ff0a3d62"));
 
-        GameOver = false;
-        txt.setText(Lit.Queston);
-        Answers[0].setText(Lit.Answers[0].Answer);
-        Answers[1].setText(Lit.Answers[1].Answer);
-        Answers[2].setText(Lit.Answers[2].Answer);
-        Answers[3].setText(Lit.Answers[3].Answer);
-        new CountDownTimer(60000,1000){
-            @Override
-            public void onTick(long l){
-                if(ONCLICK) {
-                    ONCLICK = false;
-                    onFinish();}
-                timer.setText(l/1000+"");
-                Log.d("DEBUG_QUESTION","IS ANSWER: "+GameOver);
-            }
-            @Override
-            public void onFinish(){
+            Answers[0].setTextColor(Color.WHITE);
+            Answers[1].setTextColor(Color.WHITE);
+            Answers[2].setTextColor(Color.WHITE);
+            Answers[3].setTextColor(Color.WHITE);
 
+            GameOver = false;
+            txt.setText(Lit.Queston);
+            Answers[0].setText(Lit.Answers[0].Answer);
+            Answers[1].setText(Lit.Answers[1].Answer);
+            Answers[2].setText(Lit.Answers[2].Answer);
+            Answers[3].setText(Lit.Answers[3].Answer);
+            new CountDownTimer(60000, 1000) {
+                @Override
+                public void onTick(long time) {
+                    timer.setText(time/ 1000 +"");
+                    if (ONCLICK) {
+                        ONCLICK = false;
+                        cancel();
+                        if(IsRightAnswer)
+                            proceedQuiz(++NumberOfQuestion);
+                        else {
+                            timer.setText("Wrong answer, game over");
+                        }
+                    }
+                }
+                @Override
+                public void onFinish() {
+                    timer.setText("you lose");
 
-
-                   proceedQuiz(NumberOfQuestion);
-
-                   // timer.setText("you lose");
-
-
-
-            }
-        }.start();
+                }
+            }.start();
+        }
     }
 
     @Override
@@ -174,10 +172,12 @@ public class MiniGame extends AppCompatActivity implements View.OnClickListener{
                 if(Questions[NumberOfQuestion].Answers[0].IsAnswer) {
                     v.setBackgroundColor(Color.rgb(39, 174, 96));
                     ((TextView)v).setTextColor(Color.rgb(20, 51, 6));
-                    NumberOfQuestion++;
+                    IsRightAnswer = true;
+
                 }
                 else {
                     GameOver = true;
+                    IsRightAnswer = false;
                     v.setBackgroundColor(Color.rgb(231, 76, 60));
                     ((TextView)v).setTextColor(Color.rgb(50, 10, 24));
                 }
@@ -192,13 +192,15 @@ public class MiniGame extends AppCompatActivity implements View.OnClickListener{
                 v.setBackgroundColor(Color.WHITE);
                 ((TextView)v).setTextColor(Color.BLACK);
 
-                if(Questions[NumberOfQuestion].Answers[1].IsAnswer) {
+                if(Questions[NumberOfQuestion].Answers[1].IsAnswer ) {
                     v.setBackgroundColor(Color.rgb(39, 174, 96));
                     ((TextView)v).setTextColor(Color.rgb(20, 51, 6));
-                    NumberOfQuestion++;
+                    IsRightAnswer = true;
+
                 }
                 else {
                     GameOver = true;
+                    IsRightAnswer = false;
                     v.setBackgroundColor(Color.rgb(231, 76, 60));
                     ((TextView)v).setTextColor(Color.rgb(50, 10, 24));
                 }
@@ -212,13 +214,14 @@ public class MiniGame extends AppCompatActivity implements View.OnClickListener{
                 v.setBackgroundColor(Color.WHITE);
                 ((TextView)v).setTextColor(Color.BLACK);
 
-                if(Questions[NumberOfQuestion].Answers[2].IsAnswer) {
+                if(Questions[NumberOfQuestion].Answers[2].IsAnswer ) {
                     v.setBackgroundColor(Color.rgb(39, 174, 96));
                     ((TextView)v).setTextColor(Color.rgb(20, 51, 6));
-                    NumberOfQuestion++;
+                    IsRightAnswer = true;
                 }
                 else {
                     GameOver = true;
+                    IsRightAnswer = false;
                     v.setBackgroundColor(Color.rgb(231, 76, 60));
                     ((TextView)v).setTextColor(Color.rgb(50, 10, 24));
                 }
@@ -231,13 +234,14 @@ public class MiniGame extends AppCompatActivity implements View.OnClickListener{
                 v.setBackgroundColor(Color.WHITE);
                 ((TextView)v).setTextColor(Color.BLACK);
 
-                if(Questions[NumberOfQuestion].Answers[3].IsAnswer) {
+                if(Questions[NumberOfQuestion].Answers[3].IsAnswer ) {
                     v.setBackgroundColor(Color.rgb(39, 174, 96));
                     ((TextView)v).setTextColor(Color.rgb(20, 51, 6));
-                    NumberOfQuestion++;
+                    IsRightAnswer = true;
                 }
                 else {
                     GameOver = true;
+                    IsRightAnswer = false;
                     v.setBackgroundColor(Color.rgb(231, 76, 60));
                     ((TextView)v).setTextColor(Color.rgb(50, 10, 24));
                 }

@@ -47,6 +47,7 @@ public class MainActivity extends AppCompatActivity {
         startActivity(new Intent(this, profile.class));
     }
 
+    public void openLib(MenuItem item){ startActivity(new Intent(this, libhero.class)); }
 
 
 }

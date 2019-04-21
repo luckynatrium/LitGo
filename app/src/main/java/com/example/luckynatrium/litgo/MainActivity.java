@@ -32,6 +32,7 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
+
     private void OpenQuizActivity() {
         startActivity(new Intent(this, QuizActivity.class));
     }
@@ -47,7 +48,7 @@ public class MainActivity extends AppCompatActivity {
         startActivity(new Intent(this, profile.class));
     }
 
-    public void openLib(MenuItem item){ startActivity(new Intent(this, libhero.class)); }
+    public void openLib(MenuItem item){ startActivity(new Intent(this, Lib_hero.class)); }
 
 
 }

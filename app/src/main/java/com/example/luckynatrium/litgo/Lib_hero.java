@@ -1,22 +1,31 @@
 package com.example.luckynatrium.litgo;
 
+import android.content.Context;
+import android.content.Intent;
 import android.graphics.drawable.Drawable;
+import android.support.v4.widget.DrawerLayout;
+import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.GridView;
 import android.widget.ImageView;
 import android.widget.ListView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 public class Lib_hero extends AppCompatActivity {
 
     GridView gridView;
-    int hero [] ={R.drawable.oblom, R.drawable.raskol};
-    String name_hero []={"Обломов", "Раскольников"};
+    int hero [] ={R.drawable.oblom,R.drawable.shtolc,R.drawable.raskol,R.drawable.son,R.drawable.lugin,R.drawable.oldwoman,R.drawable.arkad};
+    String name_hero []={"Илья Обломов","Андрей Штольц","Родион Раскольников","Соня Мармеладова","Петр Лужин","Старуха- процентщица","Аркадий           Свидригайлов"};
+    int lib [] ={R.drawable.oblom, R.drawable.raskol,R.drawable.shtolc,R.drawable.son,R.drawable.lugin,R.drawable.oldwoman,R.drawable.arkad};
+    String lib_name_hero []={"Илья Обломов","Андрей Штольц", "Родион Раскольников","Соня Мармеладова","Петр Лужин","Старуха- процентщица","Аркадий        Свидригайлов"};
 
+    static int pos=0;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -30,7 +39,16 @@ public class Lib_hero extends AppCompatActivity {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 Toast.makeText(Lib_hero.this,name_hero[position],Toast.LENGTH_SHORT).show();
+                if (name_hero[position]!="Скрыто") {
+                    pos=position;
+                    startActivity(new Intent(getApplicationContext(), About_hero.class));
+                }
             }
         });
+ }
+
+    static public int getPosition()
+    {
+        return pos;
     }
 }

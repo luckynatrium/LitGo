@@ -47,6 +47,6 @@ public class MainActivity extends AppCompatActivity {
         startActivity(new Intent(this, profile.class));
     }
 
-
+    public void openSettings(MenuItem item) {startActivity(new Intent(this, Settings.class));}
 
 }

@@ -16,7 +16,7 @@
         android:layout_below="@id/icons"
         android:layout_marginLeft="25dp"
         android:layout_marginTop="0dp"
-        android:text="@string/count_myhero"
+        android:text="z"
         android:textColor="@color/darkbluebackground"
         android:textStyle="bold" />
 </RelativeLayout>

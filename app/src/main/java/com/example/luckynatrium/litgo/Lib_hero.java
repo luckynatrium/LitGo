@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.graphics.drawable.Drawable;
 import android.support.v4.widget.DrawerLayout;
+import android.support.v7.app.ActionBar;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -20,12 +21,13 @@ import android.widget.Toast;
 public class Lib_hero extends AppCompatActivity {
 
     GridView gridView;
-    int hero [] ={R.drawable.oblom,R.drawable.shtolc,R.drawable.raskol,R.drawable.son,R.drawable.lugin,R.drawable.oldwoman,R.drawable.arkad};
-    String name_hero []={"Илья Обломов","Андрей Штольц","Родион Раскольников","Соня Мармеладова","Петр Лужин","Старуха- процентщица","Аркадий           Свидригайлов"};
-    int lib [] ={R.drawable.oblom, R.drawable.raskol,R.drawable.shtolc,R.drawable.son,R.drawable.lugin,R.drawable.oldwoman,R.drawable.arkad};
-    String lib_name_hero []={"Илья Обломов","Андрей Штольц", "Родион Раскольников","Соня Мармеладова","Петр Лужин","Старуха- процентщица","Аркадий        Свидригайлов"};
+    static int hero [] ={R.drawable.oblom,R.drawable.shtolc,R.drawable.olga,R.drawable.pshen,R.drawable.litgo_background,R.drawable.raskol,R.drawable.son,R.drawable.lugin,R.drawable.oldwoman,R.drawable.arkad};
+    static String name_hero []={"Илья Обломов","Андрей Штольц","Ольга Ильинская","Агафья Пшеницына","Скрыто","Родион Раскольников","Соня Мармеладова","Петр Лужин","Старуха- процентщица","Аркадий       Свидригайлов"};
+    static int lib [] ={R.drawable.oblom,R.drawable.shtolc,R.drawable.olga,R.drawable.pshen,R.drawable.zahar,R.drawable.raskol,R.drawable.son,R.drawable.lugin,R.drawable.oldwoman,R.drawable.arkad};
+    static String lib_name_hero []={"Илья Обломов","Андрей Штольц","Ольга Ильинская","Агафья Пшеницына","Захар", "Родион Раскольников","Соня Мармеладова","Петр Лужин","Старуха- процентщица","Аркадий         Свидригайлов"};
 
     static int pos=0;
+    static int count=9;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -45,10 +47,28 @@ public class Lib_hero extends AppCompatActivity {
                 }
             }
         });
- }
+        ActionBar actionBar = getSupportActionBar();
+        actionBar.setHomeButtonEnabled(true);
+        actionBar.setDisplayHomeAsUpEnabled(true);
+
+    }
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case android.R.id.home:
+                // app icon in action bar clicked; goto parent activity.
+                this.finish();
+                return true;
+            default:
+                return super.onOptionsItemSelected(item);
+        }
+    }
 
     static public int getPosition()
     {
         return pos;
     }
+
+    static public int getAllCountHero(){return lib_name_hero.length;}
+    static public int getMyCountHero(){return count;}
 }

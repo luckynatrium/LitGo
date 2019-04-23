@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.luckynatrium.litgo">
-
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
@@ -9,6 +9,9 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
+        <meta-data
+        android:name="com.google.android.geo.API_KEY"
+        android:value="AIzaSyDaYg37hfefvt9U3FtEgnbaW7qauTXaZZ8" />
         <activity android:name=".profile"></activity>
         <activity android:name=".MainActivity">
             <intent-filter>
@@ -19,5 +22,4 @@
         </activity>
         <activity android:name=".QuizActivity" />
     </application>
-
 </manifest>

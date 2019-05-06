@@ -20,8 +20,8 @@
         app:headerLayout="@layout/header"
         android:layout_height="match_parent"
         android:layout_width="wrap_content"
-        android:background="@color/darkbluebackground"
         app:itemTextColor="@color/white"
+        android:background="@color/darkbluebackground"
         app:itemIconTint="@color/white"
         app:menu="@menu/drawer_menu"
         android:layout_gravity="start">

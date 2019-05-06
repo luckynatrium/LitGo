@@ -1,18 +1,9 @@
-package com.example.luckynatrium.litgo;
+package com.example.myapplication;
 
-import android.content.Intent;
 import android.content.res.Resources;
 import android.support.v4.app.FragmentActivity;
-import android.support.v4.widget.DrawerLayout;
-import android.support.v7.app.ActionBarDrawerToggle;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
-import android.view.MenuItem;
-import android.view.View;
-import android.widget.Button;
-import android.widget.TableLayout;
-import android.widget.TextView;
 
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
@@ -22,48 +13,20 @@ import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MapStyleOptions;
 import com.google.android.gms.maps.model.MarkerOptions;
 
-import org.w3c.dom.Text;
+public class MapsActivity extends FragmentActivity implements OnMapReadyCallback {
 
-public class MainActivity extends AppCompatActivity implements OnMapReadyCallback {
-
-    private DrawerLayout drawerLayout;
-    private ActionBarDrawerToggle drawerToggle;
     private GoogleMap mMap;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
-
-        drawerLayout =(DrawerLayout)findViewById(R.id.activity_main);
-        drawerToggle = new ActionBarDrawerToggle(this, drawerLayout, R.string.open,R.string.close);
-        drawerLayout.addDrawerListener(drawerToggle);
-        drawerToggle.syncState();
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-
+        setContentView(R.layout.activity_maps);
+        // Obtain the SupportMapFragment and get notified when the map is ready to be used.
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
                 .findFragmentById(R.id.map);
         mapFragment.getMapAsync(this);
-
     }
 
-    private void OpenQuizActivity() {
-        startActivity(new Intent(this, QuizActivity.class));
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item){
-        if (drawerToggle.onOptionsItemSelected(item))
-            return true;
-        return super.onOptionsItemSelected(item);
-    }
-
-    public void openProfile(MenuItem item){
-        startActivity(new Intent(this, profile.class));
-    }
-
-    public void openMap(MenuItem item){
-        startActivity(new Intent(this, MainActivity.class));
-    }
 
     /**
      * Manipulates the map once available.
@@ -97,5 +60,4 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
         mMap.addMarker(new MarkerOptions().position(rostov).title("Marker in Rostov-on-Don"));
         mMap.moveCamera(CameraUpdateFactory.newLatLng(rostov));
     }
-
 }

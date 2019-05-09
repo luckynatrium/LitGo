@@ -16,6 +16,8 @@
         android:theme="@style/AppTheme">
         <activity android:name=".profile"></activity>
         <activity android:name=".Settings"></activity>
+        <activity android:name=".About_hero"></activity>
+        <activity android:name=".Lib_hero" />
         <activity android:name=".MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

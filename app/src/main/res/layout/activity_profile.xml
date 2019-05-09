@@ -80,18 +80,20 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/count_hero"
+                android:text="x"
                 android:textColor="@color/darkbluebackground"
                 android:textSize="20sp"
-                android:textStyle="bold" />
+                android:textStyle="bold"
+                android:id="@+id/txt_profile_all"/>
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/count_myhero"
+                android:text="x"
                 android:textColor="@color/darkbluebackground"
                 android:textSize="20sp"
-                android:textStyle="bold" />
+                android:textStyle="bold"
+                android:id="@+id/txt_profile_my"/>
 
         </android.support.v7.widget.LinearLayoutCompat>
     </android.support.constraint.ConstraintLayout>
